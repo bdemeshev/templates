@@ -117,12 +117,18 @@ knit_hooks$set(document = function(x) {
 \section*{Introduction}
 
 
-<<warning=FALSE, dev='tikz'>>=
+<<setup, warning = FALSE, message = FALSE>>=
 library("ggplot2")
+library("xtable")
+library("texreg")
 options(tikzDefaultEngine = 'xetex')
-qplot(rnorm(100), xlab = "хрр $\\sqrt{56}$")
-cat("А вдруг?")
 @
+
+<<plot, warning = FALSE, dev = 'tikz'>>=
+qplot(rnorm(100), xlab = "Привет! $\\sqrt{56}$")
+@
+
+
 
 \textit{Aliquam auctor}, metus id ultrices porta, risus enim cursus sapien, quis iaculis sapien tortor sed odio. Mauris ante orci, euismod vitae tincidunt eu, porta ut neque. Aenean sapien est, viverra vel lacinia nec, venenatis eu nulla. Maecenas ut nunc nibh, et tempus libero. Aenean vitae risus ante. Pellentesque condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui non massa tristique adipiscing.
 
@@ -167,15 +173,25 @@ ref $k$-viverra nec porttitor $x$-lacina.
 
 Vestibulum ac diam a odio tempus congue. Vivamus id enim nisi:
 
-\begin{eqnarray}
-\cos\bar{\phi}_k Q_{j,k+1,t} + Q_{j,k+1,x}+\frac{\sin^2\bar{\phi}_k}{T\cos\bar{\phi}_k} Q_{j,k+1} &=&\nonumber\\
--\cos\phi_k Q_{j,k,t} + Q_{j,k,x}-\frac{\sin^2\phi_k}{T\cos\phi_k} Q_{j,k}\label{edgek}
-\end{eqnarray}
-and
-\begin{eqnarray}
-\cos\bar{\phi}_j Q_{j+1,k,t} + Q_{j+1,k,y}+\frac{\sin^2\bar{\phi}_j}{T\cos\bar{\phi}_j} Q_{j+1,k}&=&\nonumber \\
--\cos\phi_j Q_{j,k,t} + Q_{j,k,y}-\frac{\sin^2\phi_j}{T\cos\phi_j} Q_{j,k}.\label{edgej}
-\end{eqnarray}
+<<>>=
+model_A <- lm(data = cars, dist ~ speed)
+model_B <- lm(data = cars, dist ~ speed + I(speed^2))
+@
+
+Описание одной модели:
+<<results = "asis">>=
+xtable_A <- xtable(model_A)
+print(xtable_A, floating = FALSE)
+@
+
+
+Сравнение двух моделей:
+<<results = "asis">>=
+texreg(list(model_A, model_B), table = FALSE,
+       custom.coef.names = c(NA, NA, "speed$^2$"))
+@
+
+
 
 Nulla sed arcu arcu. Duis et ante gravida orci venenatis tincidunt. Fusce vitae lacinia metus. Pellentesque habitant morbi. $\mathbf{A}\underline{\xi}=\underline{\beta}$ Vim $\underline{\xi}$ enum nidi $3(P+2)^{2}$ lacina. Id feugain $\mathbf{A}$ nun quis; magno.
 
@@ -200,7 +216,9 @@ Treatment 3 & 0.0009271 & 0.296 \\
 \captionof{table}{\color{Green} Table caption}
 \end{wraptable}
 %
-Phasellus imperdiet, tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus libero, quis tristique purus urna nec nibh.
+Phasellus imperdiet, tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec
+
+
 
 
 
@@ -241,12 +259,6 @@ Vivamus sed nibh ac metus tristique tristique a vitae ante. Sed lobortis mi ut a
 
 \section*{Conclusions}
 
-\begin{itemize}
-\item Pellentesque eget orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus libero, quis tristique purus urna nec nibh. Phasellus fermentum rutrum elementum. Nam quis justo lectus.
-\item Vestibulum sem ante, hendrerit a gravida ac, blandit quis magna.
-\item Donec sem metus, facilisis at condimentum eget, vehicula ut massa. Morbi consequat, diam sed convallis tincidunt, arcu nunc.
-\item Nunc at convallis urna. isus ante. Pellentesque condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui non massa tristique adipiscing.
-\end{itemize}
 
 \color{DarkSlateGray} % Set the color back to DarkSlateGray for the rest of the content
 
@@ -256,7 +268,7 @@ Vivamus sed nibh ac metus tristique tristique a vitae ante. Sed lobortis mi ut a
 
 \section*{Forthcoming Research}
 
-Vivamus molestie, risus tempor vehicula mattis, libero arcu volutpat purus, sed blandit sem nibh eget turpis. Maecenas rutrum dui blandit lorem vulputate gravida. Praesent venenatis mi vel lorem tempor at varius diam sagittis. Nam eu leo id turpis interdum luctus a sed augue. Nam tellus.
+
 
  %----------------------------------------------------------------------------------------
 %	REFERENCES
@@ -266,15 +278,7 @@ Vivamus molestie, risus tempor vehicula mattis, libero arcu volutpat purus, sed 
 \bibliographystyle{plain} % Plain referencing style
 \bibliography{sample} % Use the example bibliography file sample.bib
 
-%----------------------------------------------------------------------------------------
-%	ACKNOWLEDGEMENTS
-%----------------------------------------------------------------------------------------
 
-\section*{Acknowledgements}
-
-Etiam fermentum, arcu ut gravida fringilla, dolor arcu laoreet justo, ut imperdiet urna arcu a arcu. Donec nec ante a dui tempus consectetur. Cras nisi turpis, dapibus sit amet mattis sed, laoreet.
-
-%----------------------------------------------------------------------------------------
 
 \end{multicols}
 \end{document}
