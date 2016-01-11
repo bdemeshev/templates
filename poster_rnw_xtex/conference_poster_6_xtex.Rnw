@@ -9,6 +9,10 @@
 % This template has been downloaded from:
 % http://www.LaTeXTemplates.com
 %
+% modifications: cyrillic letters in Rnw + xetex
+% https://github.com/bdemeshev/templates/tree/master/poster_rnw_xtex
+% 12.01.2016
+%
 % License:
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %
