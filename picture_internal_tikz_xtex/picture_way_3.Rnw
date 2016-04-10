@@ -1,0 +1,55 @@
+\documentclass{article}
+
+\usepackage{tikz}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+
+
+
+<<include=FALSE>>=
+library("knitr")
+knit_hooks$set(document = function(x) {
+  sub('\\usepackage[]{color}', '\\usepackage[svgnames]{xcolor}', x, fixed = TRUE)
+})
+@
+
+
+
+\begin{document}
+
+
+Через прямой вывод в тех:
+
+<<include = FALSE>>=
+library("ggplot2")
+library("tikzDevice")
+@
+
+
+\begin{figure}
+\begin{tikzpicture}[scale = 0.025]
+<<echo = FALSE, results = 'asis', warning = FALSE>>=
+tikz(console = TRUE, standAlone = FALSE, bareBones = TRUE)
+qplot(rnorm(100), xlab = "Привет! $\\sqrt{56}$")
+invisible(dev.off())
+@
+\end{tikzpicture}
+\end{figure}
+
+
+
+
+
+\end{document}
