@@ -1,0 +1,111 @@
+---
+title: "Untitled"
+author: "Boris Demeshev"
+date: "7 January 2015"
+output: pdf_document
+lang: russian
+---
+
+Я помню чудное мгновенье...
+
+```{r}
+library("ggplot2")
+library("knitr")
+library("pander")
+library("memisc")
+library("psych")
+opts_chunk$set(dev='tikz', dpi=300)
+
+
+options(tikzDefaultEngine = "pdftex")
+
+options(tikzLatexPackages = c(
+   "\\usepackage{amsmath,amssymb,amsfonts}",
+   "\\usepackage{tikz}",
+   # "\\usepackage[MeX,T1,plmath]{polski}",
+   "\\usepackage[utf8]{inputenc}",
+   # "\\usepackage[T1]{fontenc}",
+   "\\usetikzlibrary{calc}",
+   "\\usepackage[russian]{babel}",
+   "\\selectlanguage{russian}",
+   "\\usepackage{standalone}"
+))
+
+#options(tikzMetricsDictionary="~/R/tikzMetrics") # speeds tikz up
+
+options(tikzDocumentDeclaration = "\\documentclass[10pt]{standalone}\n")
+
+options(tikzMetricPackages = c(
+   # "\\usepackage[MeX,T1,plmath]{polski}",
+   "\\usepackage[utf8]{inputenc}",
+   # "\\usepackage[T1]{fontenc}",
+   "\\usetikzlibrary{calc}",
+   "\\usepackage[russian]{babel}",
+   "\\selectlanguage{russian}"
+))
+
+```
+
+
+Просто график с русскими буквами
+```{r, warning=FALSE}
+qplot(x=rnorm(100), y=rnorm(100), main="Зависимость длины Удава от ширины \n по данным собранным Мартышкой в 2017 году", xlab ="Ширина Удава (см)", ylab="Длина Удава (попугаев)")
+```
+
+
+Начало набора данных:
+```{r}
+h <- swiss 
+head(h)
+```
+
+
+То же начало, только красиво:
+
+```{r, results='asis'}
+pander(head(h))
+```
+
+
+Описательные статистики:
+
+```{r}
+describe(h)
+```
+
+
+Часть описательных статистик в красивой табличке:
+
+```{r, results='asis'}
+all_stats <- describe(h)
+class(all_stats) <- "data.frame"
+some_stats <- all_stats[,c("mean","median","min","max","sd")]
+pander(some_stats)
+```
+
+
+
+
+Оценим две модели
+```{r}
+m1 <- lm(data=h, Fertility~Agriculture)
+m2 <- lm(data=h, Fertility~Agriculture+Catholic)
+```
+
+Сравним просто текстом:
+```{r}
+mtable("Ограниченная модель"=m1,"Неограниченная модель"=m2,
+       summary.stats=c("R-squared","Deviance","N"))
+```
+
+
+Красивая табличка:
+
+```{r, results='asis'}
+comparison <- mtable("Ограниченная модель"=m1,"Неограниченная модель"=m2,
+       summary.stats=c("R-squared","Deviance","N"))
+pander(comparison)
+```
+
+
+
