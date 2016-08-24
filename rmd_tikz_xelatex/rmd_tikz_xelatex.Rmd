@@ -43,7 +43,15 @@ add_xelatex <- c("\\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}",
 "\\newfontfamily{\\cyrillicfontsf}{Linux Libertine O}")
 
 options(tikzXelatexPackages = c(getOption("tikzXelatexPackages"),
-    add_xelatex))                            
+    add_xelatex)) 
+
+# does remove warnings:
+options(tikzUnicodeMetricPackages = c(     "\\usetikzlibrary{calc}",         
+"\\usepackage{fontspec,xunicode}",
+    add_xelatex)) 
+
+#"\\usepackage[T1]{fontenc}\n", 
+
 
 opts_chunk$set(dev = "tikz", 
                dev.args = list(pointsize = 11))
