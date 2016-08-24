@@ -45,7 +45,7 @@ library("tikzDevice")
 
 \begin{figure}
 \begin{tikzpicture}[scale = 0.025]
-<<echo = FALSE, results = 'asis', warning = FALSE>>=
+<<echo = FALSE, results='asis', warning=FALSE, message=FALSE>>=
 tikz(console = TRUE, standAlone = FALSE, bareBones = TRUE)
 qplot(rnorm(100), xlab = "Привет! $\\sqrt{56}$")
 invisible(dev.off())

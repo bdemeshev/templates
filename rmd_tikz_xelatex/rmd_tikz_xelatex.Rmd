@@ -32,7 +32,7 @@ library("tikzDevice")
 
 # tikz plots options
 options(tikzDefaultEngine = "xetex")
-# options(tikzMetricsDictionary = getwd()) # cash font metrics for speed
+options(tikzMetricsDictionary = "./tikz_dictionary") # cash font metrics for speed
 
 add_xelatex <- c("\\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}",
 "\\setmainfont{Linux Libertine O}",
