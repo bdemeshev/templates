@@ -6,7 +6,6 @@ lang: ru-RU
 otherlangs: en-GB
 fontsize: 11pt
 biblio-style: alphabetic
-biblatexoptions: backend=biber
 mainfont: "Linux Libertine O"
 sansfont: "Linux Libertine O"
 monofont: "Linux Libertine O"
@@ -18,6 +17,7 @@ output:
     highlight: tango
     keep_tex: yes
     latex_engine: xelatex
+    citation_package: biblatex
     number_sections: yes
     toc: yes
 header-includes: 
