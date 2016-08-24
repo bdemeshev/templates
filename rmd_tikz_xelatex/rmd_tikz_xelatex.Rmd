@@ -35,7 +35,7 @@ options(tikzDefaultEngine = "xetex")
 # options(tikzMetricsDictionary = getwd()) # cash font metrics for speed
 
 add_xelatex <- c("\\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}",
-  "\\setmainfont{Linux Libertine O}",
+"\\setmainfont{Linux Libertine O}",
 "\\setmonofont{Linux Libertine O}",
 "\\setsansfont{Linux Libertine O}",
 "\\newfontfamily{\\cyrillicfonttt}{Linux Libertine O}",
@@ -54,7 +54,7 @@ opts_chunk$set(dev = "tikz",
 
 ```{r}
 library("ggplot2") # вперёд
-qplot(rnorm(100)) + xlab("Ось абсцисс, \\sqrt{x}")
+qplot(rnorm(100)) + xlab("Ось абсцисс, $\\sqrt{x}$")
 ```
 
 
