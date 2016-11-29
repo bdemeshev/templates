@@ -10,11 +10,11 @@ dollars_to_brackets <- function(output_string) {
 }
 
 
-a <- readLines("~/Downloads/solutions.Rnw")
+a <- readLines("~/Documents/gt201/games_pset/gt_problems_utf8.tex")
 a
 a0 <- paste0(a, collapse = "\n")
 a0
 a1 <- dollars_to_brackets(a0)
-writeLines(a1, "~/Downloads/sol2.Rnw")
+writeLines(a1, "~/Documents/gt201/games_pset/gt_problems_utf8.tex")
 
 
