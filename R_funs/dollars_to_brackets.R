@@ -10,6 +10,16 @@ dollars_to_brackets <- function(output_string) {
 }
 
 
+brackets_to_dollars <- function(output_string) {
+  output_string = stringr::str_replace_all(output_string, "\\\\\\]", replacement = "$$")
+  output_string = stringr::str_replace_all(output_string, "\\\\\\[", replacement = "$$")
+  return(output_string)
+}
+
+
+
+
+
 a <- readLines("~/Documents/gt201/games_pset/gt_problems_utf8.tex")
 a
 a0 <- paste0(a, collapse = "\n")
